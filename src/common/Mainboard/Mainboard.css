@@ -1,0 +1,147 @@
+.main-container {
+  height: 100vh;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0 clamp(2rem, 4vw, 4rem);
+  font-family: var(--ff-primary);
+  gap: 3rem;
+  border: 1px solid hsl(220, 24%, 88%);
+  border-radius: 0 10px 10px 0;
+}
+
+.upper-part {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  gap: 5rem;
+}
+
+/* .upper-part h2 {
+  margin: 0;
+  padding: 0;
+} */
+
+.add-button-text {
+  background-color: var(--clr-primary-400);
+  border: none;
+  border-radius: 5px;
+  height: 2.5rem;
+  cursor: pointer;
+  margin-top: var(--size-600);
+}
+
+.input-container form {
+  display: flex;
+}
+
+.input-container input {
+  height: 50px;
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid var(--clr-neutral-300);
+  border-radius: 5px 0 0 5px;
+}
+
+.input-container input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.add-button-icon {
+  height: 50px;
+  width: 50px;
+  border-radius: 0 5px 5px 0;
+  background: var(--clr-primary-400);
+  border: none;
+  cursor: pointer;
+}
+
+.output {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.row {
+  padding: 0;
+  margin: 0;
+}
+
+.output ul {
+
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.output li {
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid var(--clr-neutral-300);
+  padding: 10px;
+  border-radius: 10px;
+  align-items: flex-start;
+}
+
+.label {
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+
+.row input {
+  margin: var(--size-600);
+  height: 15px;
+  width: 15px;
+}
+
+.delete-icon {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  color: var(--clr-neutral-400);
+  margin-top: 10px;
+}
+
+.delete-icon:hover {
+  color: red;
+}
+
+.lower-part {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  height: 50px;
+  border-top: 1px solid var(--clr-neutral-300);
+  margin: 1rem;
+}
+
+.box1,
+.box2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.box2 {
+  color: red;
+  cursor: pointer;
+}
+
+/* if true, it will crossout the inputed data */
+
+.completed {
+  text-decoration: line-through;
+  color: var(--clr-neutral-400);
+  opacity: 0.7;
+}

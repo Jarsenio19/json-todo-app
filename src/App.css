@@ -2,11 +2,19 @@
 
   /* colors */
 
-  --clr-primary-400: hsl(221, 83%, 53%);
+  --clr-primary-400: hsl(221, 100%, 68%);
+  --clr-primary-300: hsl(221, 40%, 60%);
+  --clr-primary-200: hsl(221, 100%, 84%);
+
+  /* for dark mode */
+  --clr-accent-800: hsl(221, 49%, 8%);
+  /* ----------------- */
 
   --clr-accent-900: hsl(222, 47%, 11%);
 
+
   --clr-neutral-400: hsl(215, 19%, 35%);
+  --clr-neutral-300: hsl(220, 24%, 88%);
 
 
   /* font family */
@@ -31,6 +39,8 @@
   /* 8px */
   --fs-600: 1rem;
   /* 16px */
+  --fs-650: 1.5rem;
+  /* 24px */
   --fs-700: 2rem;
   /* 32px */
   --fs-800: 3rem;
@@ -45,8 +55,12 @@
   /* 8px */
   --size-600: 1rem;
   /* 16px */
+  --size-650: 1.5rem;
+  /* 24px */
   --size-700: 2rem;
   /* 32px */
+  --size-750: 2.5rem;
+  /* 40px */
   --size-800: 1.875rem;
   /* 30px */
 }
@@ -59,6 +73,16 @@
   }
 }
 
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--ff-primary);
+}
+
 /* https://piccalil.li/blog/a-more-modern-css-reset/ */
 
 
@@ -69,6 +93,7 @@
   box-sizing: border-box;
 }
 
+
 /* Prevent font size inflation */
 html {
   -moz-text-size-adjust: none;
@@ -76,7 +101,7 @@ html {
   text-size-adjust: none;
 }
 
-/* Remove default margin in favour of better control in authored CSS */
+/* Remove default margin in favour of better containerrol in authored CSS */
 body,
 h1,
 h2,
@@ -154,6 +179,7 @@ textarea:not([rows]) {
 }
 
 
+
 /* Utility classes */
 
 .text-primary-400 {
@@ -193,6 +219,10 @@ textarea:not([rows]) {
   font-size: var(--fs-600);
 }
 
+.fs-650 {
+  font-size: var(--fs-650);
+}
+
 .fs-700 {
   font-size: var(--fs-700);
 }
@@ -200,3 +230,5 @@ textarea:not([rows]) {
 .fs-800 {
   font-size: var(--fs-800);
 }
+
+/* General styling */

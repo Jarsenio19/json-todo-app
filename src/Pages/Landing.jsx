@@ -1,9 +1,24 @@
-import React from 'react'
+import Dashboard from '../common/Dashboard/Dashboard'
+import Mainboard from '../common/Mainboard/Mainboard'
+import './index.css'
 
 const Landing = () => {
+
+
   return (
     <>
-      <div>GAME!</div>
+      <div className='container'>
+
+        {/* Dashboard */}
+        <Dashboard />
+
+        {/* Main */}
+        <Mainboard />
+
+
+      </div>
+
+
     </>
   )
 }
