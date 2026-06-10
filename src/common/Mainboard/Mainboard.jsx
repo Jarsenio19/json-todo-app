@@ -2,55 +2,85 @@ import { useState } from 'react';
 import { v4 as uuidv4 } from "uuid";
 import './Mainboard.css'
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { GiSaveArrow } from "react-icons/gi";
 
 const Mainboard = () => {
 
   const [newTask, setNewTask] = useState('')
   const [taskList, setTaskList] = useState([])
 
+  const [editTask, setEditTask] = useState('')
+  const [editMode, setEditMode] = useState('')
+
+
+  // Add task
   const addTask = (e) => {
     e.preventDefault()
 
     if (newTask.trim() !== '') {
 
-      setTaskList((prev) => [
-        ...prev, {
+      setTaskList((taskList) =>
+        [...taskList,
+        {
           id: uuidv4(),
           title: newTask,
           isComplete: false,
         }
-      ])
+        ])
       setNewTask('')
     }
   }
 
+  // Delete task
   const deleteTask = (id) => {
     setTaskList(taskList.filter((item) => item.id !== id))
   }
 
+  // Toggle complete
   const handleComplete = (id) => {
-    const toComplete = taskList.map((item) => {
+    const handleFinished = taskList.map((item) => {
       if (id === item.id) {
         return { ...item, isComplete: !item.isComplete }
       }
       return item
     })
-    setTaskList(toComplete)
+    setTaskList(handleFinished)
   }
 
-  const tasksLeft = taskList.filter(item => !item.isComplete).length;
+  // Task count
+  const taskLeft = taskList.filter((item) => !item.isComplete).length
 
-
-  const clearAllTodo = () => {
-    setTaskList(taskList.filter(item => !item.isComplete))
+  // Clear all
+  const clearAll = () => {
+    const activeTask = taskList.filter((item) => !item.isComplete)
+    setTaskList(activeTask)
   }
 
+
+  //  Start edit
+  const startEdit = (item) => {
+    setEditMode(item.id);
+    setEditTask(item.title);
+  };
+
+  //  Save edit
+  const saveEdit = () => {
+    setTaskList((prev) =>
+      prev.map((item) =>
+        item.id === editMode
+          ? { ...item, title: editTask }
+          : item
+      )
+    );
+
+    setEditMode(null);
+    setEditTask("");
+  };
 
   return (
     <>
 
       <div className='main-container'>
-
         <div className='upper-part'>
           <h1>Json To-do-List</h1>
           <button className='add-button-text'>+ Add task</button>
@@ -58,13 +88,13 @@ const Mainboard = () => {
 
         <div className='input-container'>
 
+          {/* Input */}
           <form onSubmit={addTask}>
             <input
               onChange={(e) => setNewTask(e.target.value)}
               value={newTask}
               type="text"
-              placeholder='Add new task...'
-            />
+              placeholder='Add new task...' />
             <button
               type='submit'
               className='fs-600 add-button-icon'>
@@ -73,42 +103,63 @@ const Mainboard = () => {
           </form>
         </div>
 
-        <div className='output'>
-          {taskList.length > 0 &&
-            <div className='row'>
-              <ul>
-
-                {taskList.map((item, index) => (
-                  <li key={index}>
-                    <span className={`fs-650 label ${item.isComplete ? 'completed' : ''}`} >
+        {/* List */}
+        <div className="output">
+          <ul>
+            {taskList.map((item, index) => (
+              <li key={index} className="todo-item">
+                {editMode === item.id ? (
+                  <div className="edit-container fs-550">
+                    <input
+                      value={editTask}
+                      onChange={(e) => setEditTask(e.target.value)}
+                      autoFocus
+                    />
+                    <GiSaveArrow
+                      className='save-icon'
+                      onClick={saveEdit} />
+                  </div>
+                ) : (
+                  <>
+                    <div className="left">
                       <input
+                        type="checkbox"
                         checked={item.isComplete}
                         onChange={() => handleComplete(item.id)}
-                        type="checkbox" />
+                      />
 
-                      {item.title}
-                    </span>
-                    <span
-                      className="value">
-                      <RiDeleteBin6Line
-                        onClick={() => deleteTask(item.id)}
-                        className='delete-icon' />
-                    </span>
-                  </li>
-                ))}
+                      <span
+                        onDoubleClick={() => startEdit(item)}
+                        className={
+                          item.isComplete ? "label completed" : "label  "
+                        }
+                      >
+                        {item.title}
+                      </span>
+                    </div>
 
-              </ul>
-            </div>
-
-          }
+                    <RiDeleteBin6Line
+                      onClick={() => deleteTask(item.id)}
+                      className="delete-icon"
+                    />
+                  </>
+                )}
+              </li>
+            ))}
+          </ul>
         </div>
-        <div className='lower-part'>
 
-          <span className='box1'> {tasksLeft} task(s) left</span>
-          <span className='box2'
-            onClick={clearAllTodo}> Clear completed</span>
+
+        {/* Footer */}
+        <div className='lower-part'>
+          <span className='left-part'> {taskLeft} task(s) left</span>
+          <button
+            onClick={clearAll}
+            className='right-part'>
+            Clear completed
+          </button>
         </div >
-      </div>
+      </div >
 
 
     </>
