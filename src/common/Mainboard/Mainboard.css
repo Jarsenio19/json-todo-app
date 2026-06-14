@@ -190,3 +190,22 @@
   text-decoration: line-through;
   opacity: 0.7;
 }
+
+
+.trash-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+.restore-icon {
+  height: 25px;
+  width: 25px;
+  cursor: pointer;
+  color: var(--clr-neutral-400);
+}
+
+.restore-icon:hover {
+  color: var(--clr-primary-400);
+}

@@ -1,17 +1,29 @@
-import { useState } from 'react';
-import { v4 as uuidv4 } from "uuid";
+import { useEffect, useState } from 'react'
+import { v4 as uuidv4 } from "uuid"
 import './Mainboard.css'
-import { RiDeleteBin6Line } from "react-icons/ri";
-import { GiSaveArrow } from "react-icons/gi";
+import { RiDeleteBin6Line } from "react-icons/ri"
+import { FaCheckSquare } from "react-icons/fa"
+import { useContext } from 'react'
+import { TaskContext } from '../../context/TaskContext'
+import { LiaTrashRestoreAltSolid } from "react-icons/lia";
 
 const Mainboard = () => {
 
+  const { filter } = useContext(TaskContext)
+
   const [newTask, setNewTask] = useState('')
-  const [taskList, setTaskList] = useState([])
+
+  const [taskList, setTaskList] = useState(() => {
+    const savedTasks = localStorage.getItem("tasks")
+    return savedTasks ? JSON.parse(savedTasks) : []
+  })
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(taskList))
+  }, [taskList])
 
   const [editTask, setEditTask] = useState('')
   const [editMode, setEditMode] = useState('')
-
 
   // Add task
   const addTask = (e) => {
@@ -25,6 +37,7 @@ const Mainboard = () => {
           id: uuidv4(),
           title: newTask,
           isComplete: false,
+          isDelete: false
         }
         ])
       setNewTask('')
@@ -33,7 +46,23 @@ const Mainboard = () => {
 
   // Delete task
   const deleteTask = (id) => {
-    setTaskList(taskList.filter((item) => item.id !== id))
+    setTaskList((prev) =>
+      prev.map((item) => item.id == id ? { ...item, isDelete: true } : item)
+    )
+  }
+
+  const deleteForever = (id) => {
+    setTaskList((prev) => prev.filter((item) => item.id !== id))
+  }
+  // Restore
+  const restoreTask = (id) => {
+    setTaskList((prev) =>
+      prev.map((item) =>
+        item.id === id
+          ? { ...item, isDelete: false }
+          : item
+      )
+    )
   }
 
   // Toggle complete
@@ -48,14 +77,14 @@ const Mainboard = () => {
   }
 
   // Task count
-  const taskLeft = taskList.filter((item) => !item.isComplete).length
+  const taskLeft = taskList.filter((item) => !item.isComplete && !item.isDelete).length
 
   // Clear all
   const clearAll = () => {
-    const activeTask = taskList.filter((item) => !item.isComplete)
-    setTaskList(activeTask)
+    setTaskList((prev) =>
+      prev.filter((item) => !(item.isComplete && !item.isDelete))
+    )
   }
-
 
   //  Start edit
   const startEdit = (item) => {
@@ -106,46 +135,72 @@ const Mainboard = () => {
         {/* List */}
         <div className="output">
           <ul>
-            {taskList.map((item, index) => (
-              <li key={index} className="todo-item">
-                {editMode === item.id ? (
-                  <div className="edit-container fs-550">
-                    <input
-                      value={editTask}
-                      onChange={(e) => setEditTask(e.target.value)}
-                      autoFocus
-                    />
-                    <GiSaveArrow
-                      className='save-icon'
-                      onClick={saveEdit} />
-                  </div>
-                ) : (
-                  <>
-                    <div className="left">
+            {taskList.filter((item) => {
+              if (filter === 'completed') {
+                return item.isComplete && !item.isDelete
+              }
+
+              if (filter === 'trash') {
+                return item.isDelete
+              }
+
+              return !item.isDelete;
+            })
+              .map((item, index) => (
+                <li key={index} className="todo-item">
+                  {editMode === item.id ? (
+                    <div className="edit-container fs-550">
                       <input
-                        type="checkbox"
-                        checked={item.isComplete}
-                        onChange={() => handleComplete(item.id)}
+                        value={editTask}
+                        onChange={(e) => setEditTask(e.target.value)}
+                        autoFocus
                       />
-
-                      <span
-                        onDoubleClick={() => startEdit(item)}
-                        className={
-                          item.isComplete ? "label completed" : "label  "
-                        }
-                      >
-                        {item.title}
-                      </span>
+                      <FaCheckSquare
+                        className='save-icon'
+                        onClick={saveEdit} />
                     </div>
+                  ) : (
+                    <>
+                      <div className="left">
+                        <input
+                          type="checkbox"
+                          checked={item.isComplete}
+                          onChange={() => handleComplete(item.id)}
+                        />
 
-                    <RiDeleteBin6Line
-                      onClick={() => deleteTask(item.id)}
-                      className="delete-icon"
-                    />
-                  </>
-                )}
-              </li>
-            ))}
+                        <span
+                          onDoubleClick={() => startEdit(item)}
+                          className={
+                            item.isComplete ? "label completed" : "label  "
+                          }
+                        >
+                          {item.title}
+                        </span>
+                      </div>
+
+                      {filter === 'trash' ? (
+                        <div className="trash-actions">
+                          <LiaTrashRestoreAltSolid
+                            className="restore-icon"
+                            onClick={() => restoreTask(item.id)}
+                          />
+                          <RiDeleteBin6Line
+                            onClick={() => deleteForever(item.id)}
+                            className="delete-icon"
+                            title="Delete Permanently"
+                          />
+                        </div>
+                      ) : (
+                        <RiDeleteBin6Line
+                          onClick={() => deleteTask(item.id)}
+                          className="delete-icon"
+                          title="Move to Trash"
+                        />
+                      )}
+                    </>
+                  )}
+                </li>
+              ))}
           </ul>
         </div>
 
