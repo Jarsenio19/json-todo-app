@@ -7,6 +7,7 @@ import { ImCheckboxChecked } from "react-icons/im";
 import { FaTasks } from "react-icons/fa";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { HiOutlineTrash } from "react-icons/hi";
+import { FaSun, FaMoon } from "react-icons/fa";
 
 import { TaskContext } from "../../context/TaskContext";
 
@@ -92,6 +93,20 @@ const Dashboard = () => {
           </nav>
 
           <div className="task-remaining">
+            <div className="theme-label">
+              {darkMode ? (
+                <>
+                  <FaSun className="theme-icon" />
+                  <span>Light Mode</span>
+                </>
+              ) : (
+                <>
+                  <FaMoon className="theme-icon" />
+                  <span>Dark Mode</span>
+                </>
+              )}
+            </div>
+
             <button
               className={`theme-toggle ${darkMode ? "on" : "off"}`}
               onClick={toggleTheme}
