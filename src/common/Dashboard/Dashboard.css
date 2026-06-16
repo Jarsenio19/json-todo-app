@@ -126,6 +126,12 @@ body.dark .nav-container li:hover .icons {
 
 /* Dark & Light */
 
+.task-remaining {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .theme-toggle {
   width: 60px;
   height: 30px;
@@ -135,6 +141,18 @@ body.dark .nav-container li:hover .icons {
   position: relative;
   transition: background-color 0.3s ease;
   padding: 0;
+  margin: 20px;
+}
+
+.theme-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.theme-icon {
+  font-size: 16px;
 }
 
 .theme-toggle.off {
