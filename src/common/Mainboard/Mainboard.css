@@ -11,15 +11,38 @@
   border-radius: 0 10px 10px 0;
 }
 
+
 .upper-part {
+  position: relative;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   align-items: center;
   height: 100px;
-  gap: 5rem;
 }
 
+.upper-part h1 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+}
+
+
+@media (max-width: 50em) {
+  .upper-part {
+    position: relative;
+    justify-content: flex-end;
+  }
+
+  .upper-part h1 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    font-size: 25px;
+    font-weight: var(--fw-bold);
+  }
+
+}
 
 .add-button-text {
   background-color: var(--clr-primary-400);
@@ -28,6 +51,13 @@
   height: 2.5rem;
   cursor: pointer;
   margin-top: var(--size-600);
+  margin-left: auto;
+}
+
+@media (max-width: 60em) {
+  .add-button-text {
+    display: none;
+  }
 }
 
 .input-container form {
@@ -173,15 +203,18 @@
 
 .edit-container {
   display: flex;
+  align-items: center;
   gap: 10px;
   width: 100%;
 }
 
 .edit-container input {
   flex: 1;
-  padding: 8px;
-  border: none;
-  outline: none;
+  height: 50px;
+  padding: 1rem;
+  border: 1px solid var(--clr-neutral-300);
+  border-radius: 5px;
+  font-size: var(--fs);
 }
 
 /* if true, it will crossout the inputed data */

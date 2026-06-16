@@ -1,6 +1,6 @@
+import './Mainboard.css'
 import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from "uuid"
-import './Mainboard.css'
 import { RiDeleteBin6Line } from "react-icons/ri"
 import { FaCheckSquare } from "react-icons/fa"
 import { useContext } from 'react'
@@ -44,16 +44,17 @@ const Mainboard = () => {
     }
   }
 
-  // Delete task
+  // Delete to trash
   const deleteTask = (id) => {
     setTaskList((prev) =>
       prev.map((item) => item.id == id ? { ...item, isDelete: true } : item)
     )
   }
-
+  // Delete task 
   const deleteForever = (id) => {
     setTaskList((prev) => prev.filter((item) => item.id !== id))
   }
+
   // Restore
   const restoreTask = (id) => {
     setTaskList((prev) =>
@@ -89,7 +90,7 @@ const Mainboard = () => {
   //  Start edit
   const startEdit = (item) => {
     setEditMode(item.id);
-    setEditTask(item.title);
+    setEditTask(item.title)
   };
 
   //  Save edit
@@ -111,7 +112,7 @@ const Mainboard = () => {
 
       <div className='main-container'>
         <div className='upper-part'>
-          <h1>Json To-do-List</h1>
+          <h1 className='fw-bold'>Json To-do-List</h1>
           <button className='add-button-text'>+ Add task</button>
         </div>
 
@@ -149,10 +150,11 @@ const Mainboard = () => {
               .map((item, index) => (
                 <li key={index} className="todo-item">
                   {editMode === item.id ? (
-                    <div className="edit-container fs-550">
+                    <div className="edit-container ">
                       <input
                         value={editTask}
                         onChange={(e) => setEditTask(e.target.value)}
+                        title='Done'
                         autoFocus
                       />
                       <FaCheckSquare
@@ -183,6 +185,7 @@ const Mainboard = () => {
                           <LiaTrashRestoreAltSolid
                             className="restore-icon"
                             onClick={() => restoreTask(item.id)}
+                            title='Restore'
                           />
                           <RiDeleteBin6Line
                             onClick={() => deleteForever(item.id)}

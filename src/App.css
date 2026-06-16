@@ -6,11 +6,10 @@
   --clr-primary-300: hsl(221, 40%, 60%);
   --clr-primary-200: hsl(221, 100%, 84%);
 
-  /* for dark mode */
+  --clr-accent-700: hsl(0, 0%, 20%);
   --clr-accent-800: hsl(221, 49%, 8%);
-  /* ----------------- */
-
   --clr-accent-900: hsl(222, 47%, 11%);
+
 
 
   --clr-neutral-400: hsl(215, 19%, 35%);
@@ -34,9 +33,9 @@
   /* font size */
 
 
-  --fw-500: 0.25rem;
+  --fs-500: 0.25rem;
   /* 4px */
-  --fw-550: 0.5rem;
+  --fs-550: 0.5rem;
   /* 8px */
   --fs-600: 1rem;
   /* 16px */
@@ -74,7 +73,6 @@
   }
 }
 
-
 * {
   box-sizing: border-box;
 }
@@ -83,6 +81,19 @@ body {
   margin: 0;
   font-family: var(--ff-primary);
 }
+
+/* dark & light */
+body {
+  background: white;
+  color: black;
+  transition: 0.3s;
+}
+
+body.dark {
+  background: #121212;
+  color: white;
+}
+
 
 /* https://piccalil.li/blog/a-more-modern-css-reset/ */
 
