@@ -1,0 +1,244 @@
+.main-container {
+  height: 100vh;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0 clamp(2rem, 4vw, 4rem);
+  font-family: var(--ff-primary);
+  gap: 3rem;
+  border: 1px solid hsl(220, 24%, 88%);
+  border-radius: 0 10px 10px 0;
+}
+
+
+.upper-part {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100px;
+}
+
+.upper-part h1 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+}
+
+
+@media (max-width: 50em) {
+  .upper-part {
+    position: relative;
+    justify-content: flex-end;
+  }
+
+  .upper-part h1 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    font-size: 25px;
+    font-weight: var(--fw-bold);
+  }
+
+}
+
+.add-button-text {
+  background-color: var(--clr-primary-400);
+  border: none;
+  border-radius: 5px;
+  height: 2.5rem;
+  cursor: pointer;
+  margin-top: var(--size-600);
+  margin-left: auto;
+}
+
+@media (max-width: 60em) {
+  .add-button-text {
+    display: none;
+  }
+}
+
+.input-container form {
+  display: flex;
+}
+
+.input-container input {
+  height: 50px;
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid var(--clr-neutral-300);
+  border-radius: 5px 0 0 5px;
+}
+
+.input-container input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid var(--clr-neutral-300);
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.left input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+
+.add-button-icon {
+  height: 50px;
+  width: 50px;
+  border-radius: 0 5px 5px 0;
+  background: var(--clr-primary-400);
+  border: none;
+  cursor: pointer;
+}
+
+.output {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.row {
+  padding: 0;
+  margin: 0;
+}
+
+.output ul {
+
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.output li {
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid var(--clr-neutral-300);
+  padding: 10px;
+  border-radius: 10px;
+  align-items: flex-start;
+}
+
+.label {
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  font-size: var(--fs);
+}
+
+.row input {
+  margin: var(--size-600);
+  padding: 100px;
+  height: 15px;
+  width: 15px;
+}
+
+.save-icon {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  color: var(--clr-neutral-400);
+  margin-top: 5px;
+}
+
+.save-icon:hover {
+  color: var(--clr-primary-400);
+}
+
+.delete-icon {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  color: var(--clr-neutral-400);
+}
+
+.delete-icon:hover {
+  color: red;
+}
+
+.lower-part {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  height: 50px;
+  border-top: 1px solid var(--clr-neutral-300);
+  margin: 1rem;
+}
+
+.left-part,
+.right-part {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.right-part {
+  border: none;
+  background: transparent;
+  color: red;
+  cursor: pointer;
+}
+
+.edit-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.edit-container input {
+  flex: 1;
+  height: 50px;
+  padding: 1rem;
+  border: 1px solid var(--clr-neutral-300);
+  border-radius: 5px;
+  font-size: var(--fs);
+}
+
+/* if true, it will crossout the inputed data */
+
+.completed {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+
+.trash-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+.restore-icon {
+  height: 25px;
+  width: 25px;
+  cursor: pointer;
+  color: var(--clr-neutral-400);
+}
+
+.restore-icon:hover {
+  color: var(--clr-primary-400);
+}

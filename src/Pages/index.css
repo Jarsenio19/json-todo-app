@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  margin: 0 100px 0 100px;
+
+}
+
+@media (max-width: 80em) {
+  .container {
+    margin: 0;
+    padding: 0;
+  }
+}
