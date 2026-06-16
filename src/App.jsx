@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router'
-import './app.css'
+import './App.css'
 import Landing from './Pages/Landing'
 
 const App = () => {
